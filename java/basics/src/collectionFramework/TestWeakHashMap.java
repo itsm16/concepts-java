@@ -4,27 +4,29 @@ import java.util.WeakHashMap;
 
 public class TestWeakHashMap {
     public static void main(String[] args) {
-        WeakHashMap<String, Image> testWeakHashMap = new WeakHashMap<>();
-        testWeakHashMap.put(new String("key1"), new Image("Image1"));
-        testWeakHashMap.put(new String("key2"), new Image("Image2"));
-        System.out.println(testWeakHashMap);
+        WeakHashMap<String, Image> imageCache= new WeakHashMap<>();
+        imageCache.put(new String("img1"), new Image("Image1"));
+        imageCache.put(new String("img2"), new Image("Image2"));
+        System.out.println(imageCache);
         System.gc();
-        simulate();
-        System.out.println(testWeakHashMap);
-        
+        simulateRun();
+        System.out.println(imageCache); // now prints { } empty
+        // {}
+
+
     }
 
-    public static void simulate(){
+    public static void simulateRun(){
         try {
-            System.out.println("Simulating run...\n ");
+            System.out.println("Simulating run...");
             Thread.sleep(10000);
-        } catch (Exception ignore) {
-            // TODO: handle exception
+        }catch (Exception ignore){
+
         }
     }
 
-    public static class Image {
-        private String name;
+    static class Image{
+        String name;
 
         public Image(String name) {
             this.name = name;
@@ -32,9 +34,7 @@ public class TestWeakHashMap {
 
         @Override
         public String toString() {
-            // TODO Auto-generated method stub
             return name;
         }
-        
     }
 }
